@@ -4,19 +4,19 @@
 
 This project under devolopment, if you find a bug, feel free open an issue.
 
-## Table of Contents
+# Table of Contents
 
 - [PHP Guacamole SDK](#php-guacamole-sdk)
-  - [Table of Contents](#table-of-contents)
-  - [Features](#features)
-  - [Installation](#installation)
-  - [Usage](#usage)
-      - [Users](#users)
-      - [Connections](#connections)
-      - [Connection Groups](#connection-groups)
-      - [User Groups](#user-groups)
+- [Table of Contents](#table-of-contents)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Users](#users)
+  - [Connections](#connections)
+  - [Connection Groups](#connection-groups)
+  - [User Groups](#user-groups)
 
-## Features
+# Features
 
 - User management
 - Connection management
@@ -24,24 +24,18 @@ This project under devolopment, if you find a bug, feel free open an issue.
 - User group management
 - Based on Guacamole REST API, easy to use
 
-## Installation
+# Installation
 
 ```bash
 $ composer require ridvanaltun/guacamole
 ```
 
-## Usage
+# Usage
 
-#### Users
+Create a guacamole object before proceed.
 
 ```php
-<?php
-declare(strict_types=1);
-
-require __DIR__.'/vendor/autoload.php';
-
 use ridvanaltun\Guacamole\Guacamole;
-use ridvanaltun\Guacamole\User;
 
 $host = 'localhost';
 $username = 'admin';
@@ -49,8 +43,14 @@ $password = '123456';
 
 $server = new Guacamole($host, $username, $password, [
     'timeout' => 5,
-	'verify'  => false, // don't verify ssl
+    'verify'  => false, // don't verify ssl
 ]);
+```
+
+## Users
+
+```php
+use ridvanaltun\Guacamole\User;
 
 // Create an user object
 $user = new User($server);
@@ -114,25 +114,10 @@ $username = 'testuser';
 $user->delete($username);
 ```
 
-#### Connections
+## Connections
 
 ```php
-<?php
-declare(strict_types=1);
-
-require __DIR__.'/vendor/autoload.php';
-
-use ridvanaltun\Guacamole\Guacamole;
 use ridvanaltun\Guacamole\Connection;
-
-$host = 'localhost';
-$username = 'admin';
-$password = '123456';
-
-$server = new Guacamole($host, $username, $password, [
-    'timeout' => 5,
-	'verify'  => false, // don't verify ssl
-]);
 
 // Create a connection object
 $connection = new Connection($server);
@@ -209,25 +194,10 @@ $connectionId = 1;
 $connection->delete($connectionId);
 ```
 
-#### Connection Groups
+## Connection Groups
 
 ```php
-<?php
-declare(strict_types=1);
-
-require __DIR__.'/vendor/autoload.php';
-
-use ridvanaltun\Guacamole\Guacamole;
 use ridvanaltun\Guacamole\ConnectionGroup;
-
-$host = 'localhost';
-$username = 'admin';
-$password = '123456';
-
-$server = new Guacamole($host, $username, $password, [
-    'timeout' => 5,
-	'verify'  => false, // don't verify ssl
-]);
 
 // Create a connection object
 $connectionGroup = new ConnectionGroup($server);
@@ -259,25 +229,10 @@ var_dump($newConnectionGroup);
 $connectionGroup->delete('1');
 ```
 
-#### User Groups
+## User Groups
 
 ```php
-<?php
-declare(strict_types=1);
-
-require __DIR__.'/vendor/autoload.php';
-
-use ridvanaltun\Guacamole\Guacamole;
 use ridvanaltun\Guacamole\UserGroup;
-
-$host = 'localhost';
-$username = 'admin';
-$password = '123456';
-
-$server = new Guacamole($host, $username, $password, [
-    'timeout' => 5,
-	'verify'  => false, // don't verify ssl
-]);
 
 // Create a connection object
 $userGroup = new ConnectionGroup($server);
