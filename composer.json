@@ -1,9 +1,9 @@
 {
   "name": "ridvanaltun/guacamole",
-  "description": "A simple library.",
+  "description": "Manage Guacamole with an easy SDK.",
   "keywords": [
-    "template",
-    "composer"
+    "guacamole",
+    "sdk"
   ],
   "type": "library",
   "require": {
