@@ -199,7 +199,7 @@ $connection->delete($connectionId);
 ```php
 use ridvanaltun\Guacamole\ConnectionGroup;
 
-// Create a connection object
+// Create a connection group object
 $connectionGroup = new ConnectionGroup($server);
 
 // List connection groups
@@ -234,7 +234,7 @@ $connectionGroup->delete('1');
 ```php
 use ridvanaltun\Guacamole\UserGroup;
 
-// Create a connection object
+// Create an user group object
 $userGroup = new ConnectionGroup($server);
 
 // List user groups
