@@ -26,6 +26,10 @@ This project under devolopment, if you find a bug, feel free open an issue.
 
 # Installation
 
+**This package is not installable via Composer 1.x, please make sure you upgrade to Composer 2+**
+
+[Read more about our Composer 1.x deprecation policy.](https://blog.packagist.com/deprecating-composer-1-support/)
+
 ```bash
 $ composer require ridvanaltun/guacamole
 ```
