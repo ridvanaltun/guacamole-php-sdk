@@ -111,7 +111,8 @@ var_dump($newUser);
 // Update user
 $attributes = [];
 $newUsername = 'foobar';
-$user->update('testuser', $attributes, $newUsername);
+$password = 'xxxxx'; //empty was not update
+$user->update('testuser',$password, $attributes, $newUsername);
 
 // Delete User
 $username = 'testuser';

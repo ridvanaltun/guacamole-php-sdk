@@ -101,12 +101,13 @@ class User
 		$jsonPatch = [];
 
 		foreach ($connections as $connectionIdentifier) {
-			$jsonPatch = array_merge($jsonPatch, [
+			$jsonPatch[] = (object)[
 				"op"    => "add",
-				"path"  => "/connectionPermissions/$connectionIdentifier",
+				"path"  => "/connectionPermissions/".$connectionIdentifier,
 			    "value" => "READ"
-			]);
+			];
 		}
+
 
 		$this->operation->request('PATCH', $endpoint, [
 			'json' => $jsonPatch,
@@ -119,11 +120,47 @@ class User
 		$jsonPatch = [];
 
 		foreach ($connections as $connectionIdentifier) {
-			$jsonPatch = array_merge($jsonPatch, [
+			$jsonPatch[] = (object)[
 				"op"    => "remove",
-				"path"  => "/connectionPermissions/$connectionIdentifier",
+				"path"  => "/connectionPermissions/".$connectionIdentifier,
 			    "value" => "READ"
-			]);
+			];
+		}
+
+		$this->operation->request('PATCH', $endpoint, [
+			'json' => $jsonPatch,
+		]);
+	}
+
+	public function assignSharingProfiles(string $username, array $sharingProfiles) {
+		$endpoint = '/session/data/' . $this->dataSource . '/users/' . $username . '/permissions';
+
+		$jsonPatch = [];
+
+		foreach ($sharingProfiles as $sharingProfileIdentifier) {
+			$jsonPatch[] = (object)[
+				"op"    => "add",
+				"path"  => "/sharingProfilePermissions/".$sharingProfileIdentifier,
+			    "value" => "READ"
+			];
+		}
+
+		$this->operation->request('PATCH', $endpoint, [
+			'json' => $jsonPatch,
+		]);
+	}
+
+	public function revokeSharingProfiles(string $username, array $sharingProfiles) {
+		$endpoint = '/session/data/' . $this->dataSource . '/users/' . $username . '/permissions';
+
+		$jsonPatch = [];
+
+		foreach ($sharingProfiles as $sharingProfileIdentifier) {
+			$jsonPatch[] = (object)[
+				"op"    => "remove",
+				"path"  => "/sharingProfilePermissions/".$sharingProfileIdentifier,
+			    "value" => "READ"
+			];
 		}
 
 		$this->operation->request('PATCH', $endpoint, [
@@ -142,14 +179,19 @@ class User
 		]);
 	}
 
-	public function update(string $username, array $attributes = [], string $newUsername = null) {
+	public function update(string $username,string $password='',array $attributes = [], string $newUsername = null) {
 		$endpoint = '/session/data/' . $this->dataSource . '/users/' . $username;
 
+		$params = [
+            'username'   => is_null($newUsername) ? $username : $newUsername,
+            'attributes' => (object) $attributes,
+        ];
+
+		if(strlen($password) > 0){
+            $params['password'] = $password;
+        }
 		$this->operation->request('PUT', $endpoint, [
-			'json' => [
-				'username'   => is_null($newUsername) ? $username : $newUsername,
-				'attributes' => (object) $attributes,
-			],
+			'json' => $params,
 		]);
 	}
 
