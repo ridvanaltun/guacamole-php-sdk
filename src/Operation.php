@@ -62,7 +62,7 @@ class Operation
 		return array_merge(
 			$options, [
 				'query' => ['token' => $this->token],
-			],
+			]
 		);
     }
 
